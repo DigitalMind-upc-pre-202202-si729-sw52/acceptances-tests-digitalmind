@@ -17,8 +17,8 @@ Feature: Como usuario deseo loguearme a la web app para visualizar las herramien
         Then se muestra un mensaje indicando invild credentials
 
         Examples:
-            | correo-electronico      | Password         | Result
-            | abeleldulce@gmail.com   | 12345678         | MatData: Invalid credentials. Please try again.
+            | correo-electronico      | Password         | Result                                          |
+            | abeleldulce@gmail.com   | 12345678         | MatData: Invalid credentials. Please try again. |
 
     Scenario: E03: Recuperar contraseña
         TA03
