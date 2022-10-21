@@ -8,16 +8,27 @@ Feature: Como reclutador no registrado en la aplicación, deseo crearme una cuen
         Then la app le mostrará un mensaje diciéndole que está registrado, pero que tiene que confirmar la cuenta abriendo el link de confirmación enviado a su correo electrónico.
 
         Examples: 
-            | RUC         | Correo electrónico | Contraseña | Confirmación de contraseña | Resultado                                                 |
-            | 12345678901 | mycompany@gmail.com| 12345678aA | 12345678aA                 | Se el envía un correo de confirmación para hacer el login |
+            | RUC         | Correo electrónico | Contraseña | Confirmación de contraseña | Resultado                                 |
+            | 12345678901 | mycompany@gmail.com| 12345678aA | 12345678aA                 | Se muestra un mensaje de registro exitoso |
     
     Scenario: E02 Registro inválido 
     TA02
         Given el posible reclutador se encuentra en el formulario de registro de cuenta para empresas
-        When completa los datos requeridos, pero alguno o muchos de ellos son incorrectos
+        When completa los datos requeridos con un email ya registrado
         Y presiona el botón “Registrarse”
-        Then la app le muestra un mensaje relacionado con la solución para el error o errores cometidos.
+        Then la app le muestra un mensaje indicando que el correo ya fue registrado
         
         Examples: 
-                |highlighted cell with error |
-                |new correct data            |
+            | RUC         | Correo electrónico | Contraseña | Confirmación de contraseña | Resultado                                 |
+            | 12345678901 | mycompany@gmail.com| 12345678aA | 12345678aA                 | Mensaje (Email ya fue registrado) |
+
+     Scenario: E02 Confirmación de contraseña incorrecta
+    TA02
+        Given el posible reclutador se encuentra en el formulario de registro de cuenta para empresas
+        When completa los datos requeridos e ingresa una contraseña y su confirmación de contraseña no coinciden
+        Y presiona el botón “Registrarse”
+        Then la app le muestra un mensaje indicando que debe confirmar la contraseña correctamente
+        
+        Examples: 
+            | RUC         | Correo electrónico | Contraseña | Confirmación de contraseña | Resultado                                             |
+            | 12345678901 | mycompany@gmail.com| 12345678aA | 12345678aASa#              | Mensaje (Ingresa la mismsa contraseña para confirmar) |
